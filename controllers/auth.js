@@ -67,4 +67,4 @@ const validarTokenUsuario = async (req, res = response ) => {
 
 
 
-module.exports = {login}
+module.exports = {login,validarTokenUsuario }
