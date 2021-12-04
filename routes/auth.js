@@ -13,6 +13,10 @@ router.post('/login',[
     validarCampos
 ], login );
 
+router.get('/',[
+    validarJWT
+], validarTokenUsuario );
+
 
 
 
