@@ -15,6 +15,7 @@ const {
 
 const { 
     usuariosGet,
+    usuariosGetAll, 
     usuariosPut,
     usuariosPost,
     usuariosDelete,
@@ -26,8 +27,9 @@ const {
 
 const router = Router();
 
-
 router.get('/', usuariosGet );
+router.get('/all', usuariosGetAll );
+
 
 router.put('/:id',[
     check('id', 'No es un ID valido').isMongoId(),
@@ -56,7 +58,7 @@ router.delete('/:id',[
 ], usuariosDelete );
 
 
-router.patch('/', usuariosPatch );
+router.patch('/:id', usuariosPatch );
 
 
 
