@@ -91,15 +91,14 @@ const usuariosCoordinatesPost = async(req= request, res = response) => {
 const usuariosPut = async (req= request, res = response) => {
 
     const { id } = req.params;
-    const {_id, password, google,correo, ...resto} =  req.body;
-
+    const {_id, password, google, ...resto} =  req.body;
+    //console.log(correo);
     //to do validar contra base de datos
     if(password){
         //encriptar contraseña
         const salt = bcryptjs.genSaltSync(10);
-        resto.password = bcryptjs.hashSync( password, salt );   
+        resto.password = bcryptjs.hashSync( password, salt );  
     }
-
     const usuario = await Usuario.findByIdAndUpdate(id, resto);
 
     res.json(usuario);
