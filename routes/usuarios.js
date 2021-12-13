@@ -16,10 +16,12 @@ const {
 const { 
     usuariosGet,
     usuariosGetAll, 
+    usuarioGetLocalization,
     usuariosPut,
     usuariosPost,
     usuariosDelete,
-    usuariosPatch 
+    usuariosPatch,
+    usuariosCoordinatesPost
 } = require('../controllers/usuarios');
 
 
@@ -47,7 +49,18 @@ router.post('/',[
     validarCampos
 ], usuariosPost );
 
+router.post('/coordenadas', [
+    check('id', 'No es un ID valido').isMongoId(),
+    check('latitud', 'La latitud es obligatoria').not().isEmpty(),
+    check('longitud', 'La longitud es obligatoria').not().isEmpty(),
+    validarCampos
+], usuariosCoordinatesPost );
 
+router.get('/localizacion/:id', [
+    check('id', 'No es un ID valido').isMongoId(),
+    check('id').custom( existeUsuarioPorId ),
+    validarCampos
+], usuarioGetLocalization );
 
 router.delete('/:id',[
     validarJWT,

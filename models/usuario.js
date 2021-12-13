@@ -31,6 +31,15 @@ const UsuarioSchema = Schema({
         type: Boolean,
         default: false
     },
+    latitud: {
+        type: Number,
+        default: 0
+    },
+    longitud: {
+        type: Number,
+        default: 0
+    }
+
 });
 
 UsuarioSchema.methods.toJSON = function (){

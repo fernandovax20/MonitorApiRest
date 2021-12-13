@@ -50,6 +50,14 @@ const usuariosGetAll = async(req = request, res = response)=> {
     });
 }
 
+const usuarioGetLocalization = async(req= request, res = response) => {
+    const usuario = await Usuario.findById(req.params.id);
+    const {longitud, latitud} = usuario;
+    res.json({
+        latitud,
+        longitud
+    });
+}
 
 const usuariosPost = async(req = request, res = response) => {
 
@@ -63,6 +71,18 @@ const usuariosPost = async(req = request, res = response) => {
     // guardar en base de datos
     await usuario.save();
 
+    res.json({
+        usuario
+    });
+}
+
+const usuariosCoordinatesPost = async(req= request, res = response) => {
+    const {latitud, longitud, id} = req.body;
+    const usuario = await Usuario.findById(id);
+
+    usuario.latitud = latitud;
+    usuario.longitud = longitud;
+    await usuario.save();
     res.json({
         usuario
     });
@@ -111,8 +131,10 @@ const usuariosDelete = async(req= request, res = response) => {
 module.exports = {
     usuariosGet,
     usuariosGetAll,
+    usuarioGetLocalization,
     usuariosPost,
     usuariosPut,
     usuariosPatch,
     usuariosDelete,
+    usuariosCoordinatesPost
 }
